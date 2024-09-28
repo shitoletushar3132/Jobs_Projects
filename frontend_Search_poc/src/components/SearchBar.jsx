@@ -12,7 +12,6 @@ const SearchBar = () => {
   // Fetching data on Enter key press
   const fetchData = async () => {
     const api = await handleSearch(query);
-    console.log(api);
     setResults(api.data);
   };
 

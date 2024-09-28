@@ -9,7 +9,7 @@ const Body = () => {
     if (storedOption) {
       setFilter(storedOption);
     }
-  }, [setFilter]); // Removed 'filter' and 'results' from dependencies to avoid infinite loop
+  }, [setFilter, results]); // Removed 'filter' and 'results' from dependencies to avoid infinite loop
 
   return (
     <div className="px-3 my-3">

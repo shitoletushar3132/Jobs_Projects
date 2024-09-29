@@ -8,22 +8,7 @@ const App = () => {
   const [results, setResults] = useState({});
   const [query, setQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
-  const [filter, setFilter] = useState("");
-
-  useEffect(() => {
-    const fun = () => {
-      const time = setTimeout(() => {
-        const storedOption = localStorage.getItem("selectedOption") || null;
-        if (storedOption) {
-          setFilter(storedOption);
-        } else {
-          localStorage.setItem("selectedOption", "Show All");
-        }
-      }, 100);
-      return clearTimeout(time);
-    };
-    fun();
-  }, []);
+  const [filter, setFilter] = useState("Show All");
 
   return (
     <div className="w-full min-h-screen bg-gray-100">

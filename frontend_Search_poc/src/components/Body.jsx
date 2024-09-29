@@ -2,14 +2,9 @@ import React, { useContext, useEffect, useState } from "react";
 import apiDataContext from "../context/contextData";
 
 const Body = () => {
-  const { results, filter, setFilter } = useContext(apiDataContext); // Fetching API results from context
+  const { results, filter, setFilter } = useContext(apiDataContext);
 
-  useEffect(() => {
-    const storedOption = localStorage.getItem("selectedOption");
-    if (storedOption) {
-      setFilter(storedOption);
-    }
-  }, [setFilter, results]); // Removed 'filter' and 'results' from dependencies to avoid infinite loop
+  useEffect(() => {}, [setFilter, results]);
 
   return (
     <div className="px-3 my-3">

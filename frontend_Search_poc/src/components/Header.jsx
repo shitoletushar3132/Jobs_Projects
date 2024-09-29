@@ -3,19 +3,9 @@ import SearchBar from "./SearchBar";
 import apiDataContext from "../context/contextData";
 
 const Header = () => {
-  const { setFilter, filter } = useContext(apiDataContext);
-  const [selectedOption, setSelectedOption] = useState("Show All");
+  const { filter, setFilter } = useContext(apiDataContext);
 
-  useEffect(() => {
-    const storedOption = localStorage.getItem("selectedOption");
-    if (storedOption) {
-      setFilter(storedOption);
-    }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem("selectedOption", filter);
-  }, [filter]);
+  useEffect(() => {}, [filter]);
 
   const handleSelectChange = (event) => {
     setFilter(event.target.value);

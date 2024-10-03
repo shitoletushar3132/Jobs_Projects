@@ -9,12 +9,15 @@ const returnBook = require("../controllers/transcations/returnBook.js");
 const totalRentOnBook = require("../controllers/history_book_user/totalRentOnBook.js");
 const UserOwnBooks = require("../controllers/history_book_user/UserOwnBooks.js");
 const booksOwnByUsers = require("../controllers/history_book_user/booksOwnByUsers.js");
-
+const showAllBooks = require("../controllers/books/showAllBooks.js");
+const showAllUsers = require("../controllers/users/showAllUsers.js");
 
 router.post("/add-book", addBook);
+router.get("/show-books", showAllBooks);
 router.get("/search", searchBook);
 
 router.post("/add-user", addUser);
+router.get("/show-users", showAllUsers);
 
 router.post("/issue-book", issueBook);
 router.post("/return-book", returnBook);

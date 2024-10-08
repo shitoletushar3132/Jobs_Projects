@@ -37,7 +37,6 @@ const BarChart = ({ month }) => {
     fetchData();
   }, [month]);
 
-  // Prepare data for the bar chart
   const chartData = {
     labels: data.map((item) => item.range),
     datasets: [
@@ -51,7 +50,9 @@ const BarChart = ({ month }) => {
 
   return (
     <div>
-      <h2>Bar Chart</h2>
+      <h3 className="text-2xl text-left mb-6 font-bold">
+        Bar Chart Stats - {month}
+      </h3>
       <Bar data={chartData} />
     </div>
   );

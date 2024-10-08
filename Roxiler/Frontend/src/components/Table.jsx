@@ -62,17 +62,21 @@ const Table = () => {
           <input
             type="text"
             value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
+            onChange={(e) => {
+              setSearchQuery(e.target.value);
+              setCurrentPage(1);
+            }}
             placeholder="Search..."
-            className="border border-gray-300 p-2 rounded w-1/2"
+            className="border border-gray-300 px-4 rounded-full w-1/2 outline-none shadow-sm"
           />
           <select
             value={selectedMonth}
             onChange={(e) => {
               setSelectedMonth(e.target.value);
-              setCurrentPage(1); // Reset page to 1 on month change
+              setCurrentPage(1);
+              setSearchQuery("");
             }}
-            className="border border-gray-300 p-2 rounded ml-2"
+            className="border border-gray-300 p-2 rounded ml-2 outline-none"
           >
             {months.map((month) => (
               <option key={month.value} value={month.value}>
@@ -82,8 +86,7 @@ const Table = () => {
           </select>
         </div>
 
-        {/* Scrollable Table */}
-        <div className="mt-4 max-h-80 overflow-auto border border-gray-300 shadow-md rounded-lg">
+        <div className="mt-4 overflow-auto border border-gray-300 shadow-md rounded-lg">
           <table className="min-w-full bg-white">
             <thead>
               <tr className="bg-gray-200">
@@ -96,7 +99,7 @@ const Table = () => {
                 <th className="py-3 px-6 text-left">Image</th>
               </tr>
             </thead>
-            <tbody className="text-gray-600 text-sm font-light">
+            <tbody className="text-gray-600 text-sm font-normal">
               {data.length > 0 ? (
                 data.map((transaction) => (
                   <tr key={transaction._id}>
@@ -134,7 +137,6 @@ const Table = () => {
           </table>
         </div>
 
-        {/* Pagination Controls */}
         <div className="flex justify-between mt-4">
           <button
             onClick={() => handlePageChange(currentPage - 1)}

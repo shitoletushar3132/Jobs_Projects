@@ -5,10 +5,8 @@ const router = express.Router();
 
 router.get("/seed", async (req, res) => {
   try {
-    return res.send("data add successfully");
     const getDataUrl = process.env.SEED_DATA_URL;
     const response = await fetch(getDataUrl);
-
     if (!response.ok) {
       return res
         .status(response.status)
@@ -19,8 +17,6 @@ router.get("/seed", async (req, res) => {
 
     const save = await ProductModel.insertMany(data);
     res.status(201).json({ message: "Data add successfully", save });
-
-    console.log(save);
   } catch (error) {
     console.error("Error occurred:", error);
     res.status(500).json({ message: "Internal server error", error });
@@ -31,7 +27,6 @@ router.get("/transactions", async (req, res) => {
   try {
     const { search = "", page = 1, pageSize = 5, month } = req.query;
 
-    // Create the base query
     const query = {
       $or: [
         { title: { $regex: search, $options: "i" } },
@@ -39,22 +34,18 @@ router.get("/transactions", async (req, res) => {
       ],
     };
 
-    // Only add month filtering if there's no search term
     if (!search) {
       const startDate = new Date(`${month} 1, 2022`);
       const endDate = new Date(startDate);
       endDate.setMonth(startDate.getMonth() + 1);
 
-      // Add date filtering for the month
       query.dateOfSale = { $gte: startDate, $lt: endDate };
     }
 
-    // Add price condition if the search is numeric
     if (!isNaN(Number(search))) {
       query.$or.push({ price: Number(search) });
     }
 
-    // Get total count for pagination
     const totalCount = await ProductModel.countDocuments(query);
     const totalPages = Math.ceil(totalCount / pageSize);
 
@@ -62,7 +53,7 @@ router.get("/transactions", async (req, res) => {
       .skip(Number((page - 1) * pageSize))
       .limit(Number(pageSize));
 
-    res.status(200).json({ data: products, totalPages }); // Send data and totalPages
+    res.status(200).json({ data: products, totalPages });
   } catch (error) {
     console.error("Error occurred:", error);
     res.status(500).json({ message: "Internal server error", error });
